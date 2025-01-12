@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 import CartPage from "./pages/CartPage";
 import { ToastContainer } from "react-toastify";
+import Login from "./pages/Login";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/productDetails/:id" element={<ProductDetails />} />
           <Route path="/checkout" element={<CheckoutPage />} />
           <Route path="/cart" element={<CartPage />} />
+          <Route path="/login" element={<Login />} />
         </Routes>
       </div>
       <Footer />

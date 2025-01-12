@@ -1,17 +1,38 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../ReduxSlices/cart/cartSlice";
 import { Link } from "react-router-dom";
+import { auth } from "./firebase";
+import { toast } from "react-toastify";
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch();
   const cart = useSelector((state) => state.cart.items);
+  const [userDetail, setUserDetail] = useState(null);
 
   const imageUrl = product.images[0] || "https://via.placeholder.com/150";
 
   const isProductInCart = cart.some((item) => item.id === product.id);
 
+  const fetchUserData = async () => {
+    auth.onAuthStateChanged(async (user) => {
+      setUserDetail(user);
+    });
+  };
+
+  useEffect(() => {
+    fetchUserData();
+  }, []);
+
   const handleAddToCart = () => {
+    if (!userDetail) {
+      toast.info("Please log in to add products to your cart!", {
+        position: "top-right",
+      });
+
+      return;
+    }
+
     if (!isProductInCart) {
       dispatch(addToCart(product));
     }
