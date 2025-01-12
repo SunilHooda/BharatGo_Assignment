@@ -84,7 +84,9 @@ const Home = () => {
           onClick={handlePrevPage}
           disabled={currentPage === 1}
           className={`px-4 py-2 mx-2 ${
-            currentPage === 1 ? "bg-gray-300" : "bg-blue-600 text-white"
+            currentPage === 1
+              ? "bg-gray-300 cursor-not-allowed "
+              : "bg-blue-600 text-white"
           } rounded-md`}
         >
           Prev
@@ -95,7 +97,7 @@ const Home = () => {
           disabled={items.length < productsPerPage} // Disable if no more products
           className={`px-4 py-2 mx-2 ${
             items.length < productsPerPage
-              ? "bg-gray-300"
+              ? "bg-gray-300 cursor-not-allowed"
               : "bg-blue-600 text-white"
           } rounded-md`}
         >
